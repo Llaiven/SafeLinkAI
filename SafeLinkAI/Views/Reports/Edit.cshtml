@@ -1,0 +1,66 @@
+@model SafeLinkAI.Models.EmergencyReport
+@{ ViewData["Title"] = "Editar Reporte"; }
+
+<div class="card border-0 shadow-sm" style="max-width:700px;">
+    <div class="card-header bg-primary text-white fw-bold">
+        <i class="bi bi-pencil me-2"></i> Editar Reporte #@Model.Id
+    </div>
+    <div class="card-body p-4">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <input asp-for="Id" type="hidden" />
+            <div asp-validation-summary="All" class="alert alert-danger py-2 small"></div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label fw-semibold"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Category" class="form-label fw-semibold"></label>
+                    <select asp-for="Category" class="form-select"
+                            asp-items="Html.GetEnumSelectList<SafeLinkAI.Models.ReportCategory>()"></select>
+                </div>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <div class="col-md-6">
+                        <label asp-for="Status" class="form-label fw-semibold"></label>
+                        <select asp-for="Status" class="form-select"
+                                asp-items="Html.GetEnumSelectList<SafeLinkAI.Models.ReportStatus>()"></select>
+                    </div>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label fw-semibold"></label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label fw-semibold"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger small"></span>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label asp-for="Latitude" class="form-label fw-semibold"></label>
+                    <input asp-for="Latitude" class="form-control" step="0.000001" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Longitude" class="form-label fw-semibold"></label>
+                    <input asp-for="Longitude" class="form-control" step="0.000001" />
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-save me-2"></i> Guardar Cambios
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
