@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<<<<<<< HEAD
     <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>SafeLink AI – Acceso</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
@@ -68,5 +69,76 @@
         </div>
     </div>
 </div>
+=======
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SafeLink AI – Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
+    <style>
+        body { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #7b0000 100%); min-height: 100vh; }
+        .card { border: none; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        .btn-danger { background: #7b0000; border-color: #7b0000; }
+        .btn-danger:hover { background: #a00000; }
+        .brand-icon { font-size: 3rem; color: #c0392b; }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center">
+    <div class="col-md-4 col-sm-10">
+        <div class="card p-4">
+            <div class="text-center mb-4">
+                <i class="bi bi-shield-fill-check brand-icon"></i>
+                <h2 class="fw-bold mt-2">SafeLink AI</h2>
+                <p class="text-muted">Plataforma de Gestión de Emergencias</p>
+            </div>
+
+            <form asp-action="Login" method="post">
+                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+                <div asp-validation-summary="All" class="alert alert-danger py-2 small" style="display:@(ViewData.ModelState.IsValid ? "none" : "block")"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-semibold"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="correo@ejemplo.com" autocomplete="email" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label fw-semibold"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input asp-for="Password" class="form-control" placeholder="Contraseña" autocomplete="current-password" />
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input asp-for="RememberMe" class="form-check-input" type="checkbox" />
+                    <label asp-for="RememberMe" class="form-check-label">Recordarme</label>
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100 py-2 fw-bold">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> Ingresar
+                </button>
+            </form>
+
+            <hr />
+            <div class="text-center">
+                <small class="text-muted">¿No tienes cuenta?</small>
+                <a asp-action="Register" class="ms-2 text-danger fw-semibold">Registrarse</a>
+            </div>
+
+            <!-- Demo credentials -->
+            <div class="alert alert-light mt-3 small text-muted p-2">
+                <strong>Demo:</strong><br/>
+                Admin: admin@safelinkai.com / Admin@1234!<br/>
+                Ciudadano: ciudadano@safelinkai.com / Citizen@1234!
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
 </body>
 </html>

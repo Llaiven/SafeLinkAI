@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ═══════════════════════════════════════════════════════════
    SafeLink AI — Design System
    ═══════════════════════════════════════════════════════════ */
@@ -383,4 +384,59 @@ body {
   .sl-sidebar { display: none; }
   .sl-main { padding: 16px; }
   .sl-topbar { padding: 12px 16px; }
+=======
+/* SafeLink AI – Custom Styles */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Sidebar */
+#sidebar .nav-link {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+#sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar .nav-link.active {
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    border-radius: 12px;
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+}
+
+/* Tables */
+.table th {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Alert auto-hide */
+.alert-dismissible {
+    border-radius: 8px;
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
 }

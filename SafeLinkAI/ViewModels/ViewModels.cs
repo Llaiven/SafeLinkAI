@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
 using SafeLinkAI.Data;
 using SafeLinkAI.Models;
@@ -12,10 +13,32 @@ namespace SafeLinkAI.ViewModels
         [Required(ErrorMessage = "La contraseña es obligatoria")]
         [DataType(DataType.Password)] [Display(Name = "Contraseña")] public string Password { get; set; } = string.Empty;
         [Display(Name = "Recordarme")] public bool RememberMe { get; set; }
+=======
+
+namespace SafeLinkAI.ViewModels
+{
+    // ─── Auth ────────────────────────────────────────────────────────────────
+
+    public class LoginViewModel
+    {
+        [Required(ErrorMessage = "El correo es obligatorio")]
+        [EmailAddress(ErrorMessage = "Correo inválido")]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; } = string.Empty;
+
+        [Display(Name = "Recordarme")]
+        public bool RememberMe { get; set; }
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
     }
 
     public class RegisterViewModel
     {
+<<<<<<< HEAD
         [Required][StringLength(100)][Display(Name = "Nombre Completo")] public string FullName { get; set; } = string.Empty;
         [Required][EmailAddress][Display(Name = "Correo")] public string Email { get; set; } = string.Empty;
         [Phone][Display(Name = "Teléfono")] public string? PhoneNumber { get; set; }
@@ -33,6 +56,63 @@ namespace SafeLinkAI.ViewModels
         [Display(Name = "¿Activo?")] public bool IsActive { get; set; }
     }
 
+=======
+        [Required(ErrorMessage = "El nombre completo es obligatorio")]
+        [StringLength(100)]
+        [Display(Name = "Nombre Completo")]
+        public string FullName { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "El correo es obligatorio")]
+        [EmailAddress(ErrorMessage = "Correo inválido")]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; } = string.Empty;
+
+        [Phone]
+        [Display(Name = "Teléfono")]
+        public string? PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "Mínimo 6 caracteres")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; } = string.Empty;
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar contraseña")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+    }
+
+    // ─── Users ───────────────────────────────────────────────────────────────
+
+    public class EditUserViewModel
+    {
+        public string Id { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "El nombre completo es obligatorio")]
+        [StringLength(100)]
+        [Display(Name = "Nombre Completo")]
+        public string FullName { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "El correo es obligatorio")]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; } = string.Empty;
+
+        [Phone]
+        [Display(Name = "Teléfono")]
+        public string? PhoneNumber { get; set; }
+
+        [Display(Name = "Rol")]
+        public string Role { get; set; } = "Ciudadano";
+
+        [Display(Name = "¿Activo?")]
+        public bool IsActive { get; set; }
+    }
+
+    // ─── Reports ─────────────────────────────────────────────────────────────
+
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
     public class ReportFilterViewModel
     {
         public string? StatusFilter { get; set; }
@@ -40,15 +120,24 @@ namespace SafeLinkAI.ViewModels
         public string? SearchTerm { get; set; }
     }
 
+<<<<<<< HEAD
+=======
+    // ─── Dashboard ───────────────────────────────────────────────────────────
+
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
     public class DashboardViewModel
     {
         public int TotalReports { get; set; }
         public int ActiveReports { get; set; }
+<<<<<<< HEAD
         public int AttendingReports { get; set; }
+=======
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
         public int ResolvedReports { get; set; }
         public int TotalUsers { get; set; }
         public int UnreadNotifications { get; set; }
     }
+<<<<<<< HEAD
 
     // Dashboard de reportes por categoría
     public class ReportsDashboardViewModel
@@ -133,4 +222,6 @@ namespace SafeLinkAI.ViewModels
         [Compare("NewPassword", ErrorMessage = "Las contraseñas no coinciden")]
         public string ConfirmPassword { get; set; } = string.Empty;
     }
+=======
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
 }

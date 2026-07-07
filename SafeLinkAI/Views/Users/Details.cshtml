@@ -1,6 +1,7 @@
 @model SafeLinkAI.Models.ApplicationUser
 @{ ViewData["Title"] = "Detalles del Usuario"; }
 
+<<<<<<< HEAD
 <div class="sl-card" style="max-width:500px;">
     <div class="sl-card-header">
         <span><i class="bi bi-person-circle" style="color:#c0392b;"></i> @Model.FullName</span>
@@ -38,6 +39,46 @@
         <div style="display:flex;gap:8px;">
             <a asp-action="Edit" asp-route-id="@Model.Id" class="sl-btn sl-btn-primary"><i class="bi bi-pencil"></i> Editar</a>
             <a asp-action="Index" class="sl-btn sl-btn-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+=======
+<div class="card border-0 shadow-sm" style="max-width:550px;">
+    <div class="card-header bg-white border-bottom fw-bold">
+        <i class="bi bi-person-circle text-primary me-2"></i> @Model.FullName
+    </div>
+    <div class="card-body p-4">
+        <dl class="row">
+            <dt class="col-sm-4 text-muted">Nombre</dt>
+            <dd class="col-sm-8 fw-semibold">@Model.FullName</dd>
+
+            <dt class="col-sm-4 text-muted">Correo</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+
+            <dt class="col-sm-4 text-muted">Teléfono</dt>
+            <dd class="col-sm-8">@(Model.PhoneNumber ?? "No registrado")</dd>
+
+            <dt class="col-sm-4 text-muted">Rol</dt>
+            <dd class="col-sm-8">
+                <span class="badge @(Model.Role == "Administrador" ? "bg-danger" : "bg-primary")">@Model.Role</span>
+            </dd>
+
+            <dt class="col-sm-4 text-muted">Estado</dt>
+            <dd class="col-sm-8">
+                <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
+                    @(Model.IsActive ? "Activo" : "Inactivo")
+                </span>
+            </dd>
+
+            <dt class="col-sm-4 text-muted">Registrado</dt>
+            <dd class="col-sm-8">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</dd>
+        </dl>
+
+        <div class="d-flex gap-2 mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil me-1"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i> Volver
+            </a>
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
         </div>
     </div>
 </div>

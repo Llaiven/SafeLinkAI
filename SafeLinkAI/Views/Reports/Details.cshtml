@@ -1,6 +1,7 @@
 @model SafeLinkAI.Models.EmergencyReport
 @{ ViewData["Title"] = "Detalles del Reporte"; }
 
+<<<<<<< HEAD
 @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
 {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -129,3 +130,70 @@
     </script>
     }
 }
+=======
+<div class="card border-0 shadow-sm" style="max-width:700px;">
+    <div class="card-header bg-white border-bottom fw-bold">
+        <i class="bi bi-exclamation-triangle text-danger me-2"></i> Reporte #@Model.Id
+    </div>
+    <div class="card-body p-4">
+        <dl class="row">
+            <dt class="col-sm-4 text-muted">Título</dt>
+            <dd class="col-sm-8 fw-semibold">@Model.Title</dd>
+
+            <dt class="col-sm-4 text-muted">Categoría</dt>
+            <dd class="col-sm-8"><span class="badge bg-secondary">@Model.Category</span></dd>
+
+            <dt class="col-sm-4 text-muted">Estado</dt>
+            <dd class="col-sm-8">
+                @{
+                    var badge = Model.Status switch
+                    {
+                        SafeLinkAI.Models.ReportStatus.Activo => "bg-danger",
+                        SafeLinkAI.Models.ReportStatus.EnAtencion => "bg-warning text-dark",
+                        SafeLinkAI.Models.ReportStatus.Resuelto => "bg-success",
+                        _ => "bg-secondary"
+                    };
+                }
+                <span class="badge @badge">@Model.Status</span>
+            </dd>
+
+            <dt class="col-sm-4 text-muted">Descripción</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+
+            <dt class="col-sm-4 text-muted">Dirección</dt>
+            <dd class="col-sm-8">@(Model.Address ?? "No especificada")</dd>
+
+            @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
+            {
+                <dt class="col-sm-4 text-muted">Coordenadas</dt>
+                <dd class="col-sm-8">
+                    <a href="https://maps.google.com/?q=@Model.Latitude,@Model.Longitude" target="_blank" class="text-danger">
+                        <i class="bi bi-geo-alt me-1"></i> Ver en mapa (@Model.Latitude, @Model.Longitude)
+                    </a>
+                </dd>
+            }
+
+            <dt class="col-sm-4 text-muted">Reportado por</dt>
+            <dd class="col-sm-8">@(Model.User?.FullName ?? "—")</dd>
+
+            <dt class="col-sm-4 text-muted">Fecha de reporte</dt>
+            <dd class="col-sm-8">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            @if (Model.UpdatedAt.HasValue)
+            {
+                <dt class="col-sm-4 text-muted">Última actualización</dt>
+                <dd class="col-sm-8">@Model.UpdatedAt?.ToString("dd/MM/yyyy HH:mm")</dd>
+            }
+        </dl>
+
+        <div class="d-flex gap-2 mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil me-1"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i> Volver
+            </a>
+        </div>
+    </div>
+</div>
+>>>>>>> 7ee0d1330da358cbb81d04df34c76b99ba1f1fc3
