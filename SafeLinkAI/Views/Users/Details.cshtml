@@ -1,0 +1,43 @@
+@model SafeLinkAI.Models.ApplicationUser
+@{ ViewData["Title"] = "Detalles del Usuario"; }
+
+<div class="sl-card" style="max-width:500px;">
+    <div class="sl-card-header">
+        <span><i class="bi bi-person-circle" style="color:#c0392b;"></i> @Model.FullName</span>
+        <span class="sl-badge @(Model.IsActive ? "sl-badge-green" : "sl-badge-gray")">
+            @(Model.IsActive ? "Activo" : "Inactivo")
+        </span>
+    </div>
+    <div class="sl-card-body">
+        <div style="text-align:center;margin-bottom:24px;">
+            <div style="width:72px;height:72px;background:#fdf2f2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#c0392b;font-size:28px;font-weight:800;margin:0 auto 12px;">
+                @Model.FullName.Substring(0,1).ToUpper()
+            </div>
+            <div style="font-size:18px;font-weight:800;">@Model.FullName</div>
+            <span class="sl-badge @(Model.Role == "Administrador" ? "sl-badge-red" : "sl-badge-blue")" style="margin-top:6px;">@Model.Role</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;gap:10px;background:#f8f9fa;border-radius:8px;padding:10px 14px;">
+                <i class="bi bi-envelope" style="color:#c0392b;"></i>
+                <span style="font-size:13.5px;">@Model.Email</span>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+            {
+                <div style="display:flex;align-items:center;gap:10px;background:#f8f9fa;border-radius:8px;padding:10px 14px;">
+                    <i class="bi bi-telephone" style="color:#c0392b;"></i>
+                    <span style="font-size:13.5px;">@Model.PhoneNumber</span>
+                </div>
+            }
+            <div style="display:flex;align-items:center;gap:10px;background:#f8f9fa;border-radius:8px;padding:10px 14px;">
+                <i class="bi bi-calendar" style="color:#c0392b;"></i>
+                <span style="font-size:13.5px;">Registrado el @Model.CreatedAt.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+
+        <div style="display:flex;gap:8px;">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="sl-btn sl-btn-primary"><i class="bi bi-pencil"></i> Editar</a>
+            <a asp-action="Index" class="sl-btn sl-btn-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+</div>

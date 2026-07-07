@@ -1,0 +1,72 @@
+@model LoginViewModel
+@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>SafeLink AI – Acceso</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+<div class="sl-login-bg">
+    <div class="sl-login-card">
+        <div class="text-center mb-4">
+            <div class="sl-login-logo"><i class="bi bi-shield-fill-check"></i></div>
+            <div class="sl-login-title mt-2">SafeLink AI</div>
+            <div class="sl-login-sub">Plataforma de Gestión de Emergencias Comunitarias</div>
+        </div>
+
+        <form asp-action="Login" method="post">
+            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]"/>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div style="background:#fdf2f2;border:1px solid #f5c6c6;border-radius:8px;padding:10px 14px;margin-bottom:16px;color:#922b21;font-size:13px;">
+                    <div asp-validation-summary="All"></div>
+                </div>
+            }
+
+            <div class="sl-form-group">
+                <label class="sl-label">Correo electrónico</label>
+                <div class="sl-input-group">
+                    <span class="sl-input-icon"><i class="bi bi-envelope"></i></span>
+                    <input asp-for="Email" class="sl-input" placeholder="correo@ejemplo.com" autocomplete="email"/>
+                </div>
+            </div>
+
+            <div class="sl-form-group">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <label class="sl-label" style="margin-bottom:0;">Contraseña</label>
+                    <a asp-action="ForgotPassword" asp-controller="Password"
+                       style="font-size:12px;color:#c0392b;text-decoration:none;font-weight:600;">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+                <div class="sl-input-group">
+                    <span class="sl-input-icon"><i class="bi bi-lock"></i></span>
+                    <input asp-for="Password" class="sl-input" placeholder="••••••••" autocomplete="current-password"/>
+                </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+                <input asp-for="RememberMe" type="checkbox" style="width:16px;height:16px;accent-color:#c0392b;"/>
+                <label asp-for="RememberMe" style="font-size:13px;color:#6c757d;cursor:pointer;">Recordarme</label>
+            </div>
+
+            <button type="submit" class="sl-btn sl-btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:15px;">
+                <i class="bi bi-box-arrow-in-right"></i> Ingresar
+            </button>
+        </form>
+
+        <div style="text-align:center;margin-top:20px;font-size:13px;color:#6c757d;">
+            ¿No tienes cuenta? <a asp-action="Register" style="color:#c0392b;font-weight:600;">Regístrate</a>
+        </div>
+
+        <div style="background:#f8f9fa;border-radius:8px;padding:12px;margin-top:20px;font-size:12px;color:#6c757d;">
+            <strong>Demo:</strong> admin@safelinkai.com / Admin@1234!<br/>
+            Ciudadano: ciudadano@safelinkai.com / Citizen@1234!
+        </div>
+    </div>
+</div>
+</body>
+</html>

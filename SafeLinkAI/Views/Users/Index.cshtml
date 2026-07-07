@@ -1,0 +1,55 @@
+@* Users/Index.cshtml *@
+@model List<SafeLinkAI.Models.ApplicationUser>
+@{ ViewData["Title"] = "Gestión de Usuarios"; }
+
+<div class="sl-card">
+    <div class="sl-card-header">
+        <span><i class="bi bi-people-fill" style="color:#c0392b;"></i> Usuarios (@Model.Count)</span>
+        <form method="get" style="display:flex;gap:8px;">
+            <div class="sl-input-group" style="width:220px;">
+                <span class="sl-input-icon"><i class="bi bi-search"></i></span>
+                <input type="text" name="search" value="@ViewBag.Search" class="sl-input" placeholder="Buscar..." style="padding-left:36px;"/>
+            </div>
+            <button type="submit" class="sl-btn sl-btn-primary sl-btn-sm">Buscar</button>
+            <a asp-action="Index" class="sl-btn sl-btn-secondary sl-btn-sm">Limpiar</a>
+        </form>
+    </div>
+    <div class="sl-table-wrap">
+        <table class="sl-table">
+            <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th><th>Registro</th><th style="text-align:center;">Acciones</th></tr></thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr style="@(u.IsActive ? "" : "opacity:.6;")">
+                        <td style="font-weight:600;display:flex;align-items:center;gap:10px;">
+                            <div style="width:32px;height:32px;background:#fdf2f2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#c0392b;font-weight:700;font-size:13px;flex-shrink:0;">
+                                @u.FullName.Substring(0,1).ToUpper()
+                            </div>
+                            @u.FullName
+                        </td>
+                        <td style="color:#6c757d;font-size:13px;">@u.Email</td>
+                        <td><span class="sl-badge @(u.Role == "Administrador" ? "sl-badge-red" : "sl-badge-blue")">@u.Role</span></td>
+                        <td><span class="sl-badge @(u.IsActive ? "sl-badge-green" : "sl-badge-gray")">@(u.IsActive ? "Activo" : "Inactivo")</span></td>
+                        <td style="font-size:12px;color:#9ca3af;">@u.CreatedAt.ToString("dd/MM/yy")</td>
+                        <td>
+                            <div style="display:flex;gap:6px;justify-content:center;">
+                                <a asp-action="Details" asp-route-id="@u.Id" class="sl-btn sl-btn-outline sl-btn-sm sl-btn-icon"><i class="bi bi-eye"></i></a>
+                                <a asp-action="Edit"    asp-route-id="@u.Id" class="sl-btn sl-btn-outline sl-btn-sm sl-btn-icon"><i class="bi bi-pencil"></i></a>
+                                <form asp-action="ToggleActive" asp-route-id="@u.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="sl-btn sl-btn-sm sl-btn-icon @(u.IsActive ? "sl-btn-outline" : "sl-btn-secondary")" title="@(u.IsActive ? "Desactivar" : "Activar")">
+                                        <i class="bi bi-@(u.IsActive ? "pause-fill" : "play-fill")"></i>
+                                    </button>
+                                </form>
+                                <form asp-action="Delete" asp-route-id="@u.Id" method="post" onsubmit="return confirm('¿Eliminar a @u.FullName?')">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="sl-btn sl-btn-danger sl-btn-sm sl-btn-icon"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
